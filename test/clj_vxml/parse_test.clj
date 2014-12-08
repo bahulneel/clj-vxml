@@ -32,6 +32,11 @@
                      :input [:block {:name :block-name}]
                      :expected [[1 :tag :block]
                                 [1 :name :block-name]]}
+                    {:name "Some elements are text"
+                     :input [:block {} "Hello World"]
+                     :expected [[1 :tag :block]
+                                [2 :#parent 1]
+                                [2 :content "Hello World"]]}
                     {:name "Elements can have a parent"
                      :input [:block {:name :block-name} [:prompt {}]]
                      :expected [[1 :tag :block]
