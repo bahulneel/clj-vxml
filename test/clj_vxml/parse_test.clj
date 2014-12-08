@@ -10,7 +10,7 @@
 <vxml version=\"2.1\" xmlns=\"http://www.w3.org/2001/vxml\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/vxml.xsd\">
 </vxml>"
                      :expected [:vxml {:version "2.1"
-                                       :xsi/schemaLocation "http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/vxml.xsd"}]}
+                                       :xsi:schemaLocation "http://www.w3.org/2001/vxml http://www.w3.org/TR/voicexml21/vxml.xsd"}]}
                     {:name "Block on it's own"
                      :input "<block></block>"
                      :expected [:block {}]}
@@ -29,24 +29,24 @@
                      :input [:block {}]
                      :expected [[1 :tag :block]]}
                     {:name "Elements can have attributes"
-                     :input [:block {:name :block-name}]
+                     :input [:block {:name "block-name"}]
                      :expected [[1 :tag :block]
-                                [1 :name :block-name]]}
+                                [1 :name "block-name"]]}
                     {:name "Some elements are text"
                      :input [:block {} "Hello World"]
                      :expected [[1 :tag :block]
                                 [2 :#parent 1]
                                 [2 :content "Hello World"]]}
                     {:name "Elements can have a parent"
-                     :input [:block {:name :block-name} [:prompt {}]]
+                     :input [:block {:name "block-name"} [:prompt {}]]
                      :expected [[1 :tag :block]
-                                [1 :name :block-name]
+                                [1 :name "block-name"]
                                 [2 :#parent 1]
                                 [2 :tag :prompt]]}
                     {:name "Elements can have more than one child"
-                     :input [:block {:name :block-name} [:prompt] [:audio]]
+                     :input [:block {:name "block-name"} [:prompt] [:audio]]
                      :expected [[1 :tag :block]
-                                [1 :name :block-name]
+                                [1 :name "block-name"]
                                 [2 :#parent 1]
                                 [2 :tag :prompt]
                                 [3 :#parent 1]

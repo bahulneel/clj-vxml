@@ -8,11 +8,21 @@
   (let [xml (xml/parse-str s :namespace-aware true)]
     (element->hiccup xml)))
 
+(defn fix-namespaces
+  [a]
+  (into {} (map (fn [[k v]]
+                  (let [ns (namespace k)
+                        n (name k)
+                        k (if ns (keyword (str ns ":" n)) k)]
+                    [k v]))
+                a)))
+
 (defn element->hiccup
   [e]
   (if (string? e)
     e
     (let [{:keys [tag attrs content]} e
+          attrs (fix-namespaces attrs)
           content (map element->hiccup content)]
       (apply vector tag attrs content))))
 
